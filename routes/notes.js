@@ -1,15 +1,20 @@
+// initialize notes as an express router
 const notes = require('express').Router();
+// helper functions to change file
 const { readFromFile, readAndAppend, deleteFromFile } = require('../helpers/fsUtils');
 
+// import npm package for ramdon id generator
 const uuid = require('uniqid');
   
-
+// get request for api/notes
 notes.get('/', (req, res) => {
     readFromFile('./db/db.json').then((data) => {
         res.json(JSON.parse(data));
+        res.status(200).json(`Retrieve data successfully!`);
     })
 });
 
+// post request for api/notes
 notes.post('/', (req, res) => {
     const { title, text } = req.body;
     if (req.body) {
@@ -26,6 +31,7 @@ notes.post('/', (req, res) => {
     }
 });
 
+// delete request for api/notes
 notes.delete('/:id', (req, res) => {
     if(req.params.id) {
         const noteId = req.params.id;
