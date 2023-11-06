@@ -10,7 +10,6 @@ const uuid = require('uniqid');
 notes.get('/', (req, res) => {
     readFromFile('./db/db.json').then((data) => {
         res.json(JSON.parse(data));
-        res.status(200).json(`Retrieve data successfully!`);
     })
 });
 
